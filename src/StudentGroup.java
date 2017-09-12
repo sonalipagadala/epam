@@ -1,4 +1,4 @@
-import java.util.Date;
+import java.util.*;
 
 /**
  * A fix-sized array of students
@@ -27,15 +27,15 @@ public class StudentGroup implements StudentArrayOperation {
 	public Student[] getStudents() {
 		// Add your implementation here
 		
-		return students [];
+		return students;
 	}
 
 	@Override
 	public void setStudents(Student[] students) throws IllegalArgumentException {
 		// Add your implementation here
-		if(students==NULL)
+		if(students==null)
 		{
-			throw new IllegalArugmentException;
+			throw new IllegalArgumentException();
 		}
 		for(int i=0;i<students.length;i++)
 		{
@@ -51,29 +51,32 @@ public class StudentGroup implements StudentArrayOperation {
 		// Add your implementation here
 		if(index>students.length)
 		{
-			throw new IllegalArgumentException;
+			throw new IllegalArgumentException();
 		}
 		return students[index];
 	}
 
 	@Override
 	public void setStudent(Student student, int index) throws IllegalArgumentException{
-		if(student==NULL||index>=students.length)
+		if(student==null||index>=students.length)
 		{
-			throw new IllegalArgumentException;
+			throw new IllegalArgumentException();
 		}
 		// Add your implementation here
-		this.students[index]=student[index];
+		this.students[index].setId(student.getId());
+		this.students[index].setFullName(student.getFullName());
+		this.students[index].setBirthDate(student.getBirthDate());
+		this.students[index].setAvgMark(student.getAvgMark());
 	}
 
 	@Override
 	public void addFirst(Student student)throws IllegalArgumentException {
 		// Add your implementation here
-		if(student==NULL)
+		if(student==null)
 		{
-			throw new IllegalArgumentException;
+			throw new IllegalArgumentException();
 		}
-		LinkedList<Student> ll=new LinkedList<Student>(students.length);
+		LinkedList<Student> ll=new LinkedList<Student>();
 		for(int i=0;i<students.length;i++)
 		{
 			ll.add(students[i]);
@@ -83,13 +86,13 @@ public class StudentGroup implements StudentArrayOperation {
 	}
 
 	@Override
-	public void addLast(Student student) throw IllegalArgumentException{
+	public void addLast(Student student) throws IllegalArgumentException{
 		// Add your implementation here
-		if(student==NULL)
+		if(student==null)
 		{
-			throw new IllegalArgumentException;
+			throw new IllegalArgumentException();
 		}
-		LinkedList<Student> ll=new LinkedList<Student>(students.length);
+		LinkedList<Student> ll=new LinkedList<Student>();
 		for(int i=0;i<students.length;i++)
 		{
 			ll.add(students[i]);
@@ -101,11 +104,11 @@ public class StudentGroup implements StudentArrayOperation {
 	@Override
 	public void add(Student student, int index) throws IllegalArgumentException{
 		// Add your implementation here
-		if(student==NULL||index>=students.length)
+		if(student==null||index>=students.length)
 		{
-			throw new IllegalArgumentException;
+			throw new IllegalArgumentException();
 		}
-		LinkedList<Student> ll=new LinkedList<Student>(students.length);
+		LinkedList<Student> ll=new LinkedList<Student>();
 		for(int i=0;i<students.length;i++)
 		{
 			ll.add(students[i]);
@@ -119,9 +122,9 @@ public class StudentGroup implements StudentArrayOperation {
 		// Add your implementation here
 		if(index>=students.length)
 		{
-			throw new IllegalArgumentException;
+			throw new IllegalArgumentException();
 		}
-		LinkedList<Student> ll=new LinkedList<Student>(students.length);
+		LinkedList<Student> ll=new LinkedList<Student>();
 		for(int i=0;i<students.length;i++)
 		{
 			ll.add(students[i]);
@@ -133,14 +136,14 @@ public class StudentGroup implements StudentArrayOperation {
 	@Override
 	public void remove(Student student) throws IllegalArgumentException{
 		// Add your implementation here
-		if(student==NULL)
+		if(student==null)
 		{
-			throw new IllegalArgumentException;
+			throw new IllegalArgumentException();
 		}
-		LinkedList<Student> ll=new LinkedList<Student>(students.length);
+		LinkedList<Student> ll=new LinkedList<Student>();
 		for(int i=0;i<students.length;i++)
 		{
-			if((students[i].getId()==student.getId())&&(students[i].getFullName()==student.getFullName())&&(student[i].getBirthDate()==student.setBirthDate())&&(student[i].getAvgMark==student.getAvgMark()))
+			if((students[i].getId()==student.getId())&&(students[i].getFullName()==student.getFullName())&&(students[i].getBirthDate()==student.getBirthDate())&&(students[i].getAvgMark()==student.getAvgMark()))
 			{
 				continue;
 			}
@@ -150,13 +153,14 @@ public class StudentGroup implements StudentArrayOperation {
 	}
 
 	@Override
-	public void removeFromIndex(int index) throw IllegalArgumentException{
+	public void removeFromIndex(int index) throws IllegalArgumentException{
 		// Add your implementation here
+		
 		if(index>=students.length)
 		{
-			throw new IllegalArgumentException;
+			throw new IllegalArgumentException();
 		}
-		LinkedList<Student> ll=new LinkedList<Student>(students.length);
+		LinkedList<Student> ll=new LinkedList<Student>();
 		for(int i=0;i<students.length;i++)
 		{
 			if(i==index)
@@ -171,10 +175,11 @@ public class StudentGroup implements StudentArrayOperation {
 	@Override
 	public void removeFromElement(Student student) throws IllegalArgumentException {
 		// Add your implementation here
+		LinkedList<Student> ll=new LinkedList<Student>(); 
 		int flag=0;
-		if(student==NULL)
+		if(student==null)
 		{
-			throw new IllegalArgumentException;
+			throw new IllegalArgumentException();
 		}
 		for(int i=0;i<students.length;i++)
 		{
@@ -183,20 +188,21 @@ public class StudentGroup implements StudentArrayOperation {
 				ll.remove(students[i]);
 				continue;
 			}
-			if((students[i].getId()==student.getId())&&(students[i].getFullName()==student.getFullName())&&(student[i].getBirthDate()==student.setBirthDate())&&(student[i].getAvgMark==student.getAvgMark()))
+			if((students[i].getId()==student.getId())&&(students[i].getFullName()==student.getFullName())&&(students[i].getBirthDate()==student.getBirthDate())&&(students[i].getAvgMark()==student.getAvgMark()))
 			{
 				flag=1;
 			}
 		}
+		students=ll.toArray(new Student[ll.size()]);
 	}
 
 	@Override
 	public void removeToIndex(int index) throws IllegalArgumentException{
 		// Add your implementation here
-		
-		if(student==NULL)
+		LinkedList<Student> ll=new LinkedList<Student>(); 
+		if(index>=students.length)
 		{
-			throw new IllegalArgumentException;
+			throw new IllegalArgumentException();
 		}
 		for(int i=0;i<=index;i++)
 		{
@@ -207,17 +213,17 @@ public class StudentGroup implements StudentArrayOperation {
 	@Override
 	public void removeToElement(Student student) throws IllegalArgumentException {
 		// Add your implementation here
-		if(student==NULL)
+		if(student==null)
 		{
-			throw new IllegalArgumentException;
+			throw new IllegalArgumentException();
 		}
-		 for(int i=0;i<=index;i++)
+		 for(int i=0;i<students.length;i++)
 		{
-			if((students[i].getId()==student.getId())&&(students[i].getFullName()==student.getFullName())&&(student[i].getBirthDate()==student.setBirthDate())&&(student[i].getAvgMark==student.getAvgMark()))
+			if((students[i].getId()==student.getId())&&(students[i].getFullName()==student.getFullName())&&(students[i].getBirthDate()==student.getBirthDate())&&(students[i].getAvgMark()==student.getAvgMark()))
 			{
 				break;
 			}
-				ll.remove(students[i]);
+				
 		}	
 	}
 
@@ -232,9 +238,9 @@ public class StudentGroup implements StudentArrayOperation {
 		// Add your implementation here
 		ArrayList<Student> al=new ArrayList<Student>();
 		
-		if(date==NULL)
+		if(date==null)
 		{
-			throw new IllegalArugumentException;
+			throw new IllegalArgumentException();
 		}
 		for(int i=0;i<students.length;i++)
 		{
@@ -243,8 +249,8 @@ public class StudentGroup implements StudentArrayOperation {
 				al.add(students[i]);
 			}
 		}
-		Student[] s=ll.toArray(new Student[ll.size()]);
-		return [] s;
+		Student[] s=al.toArray(new Student[al.size()]);
+		return s;
 	}
 
 	@Override
@@ -281,11 +287,11 @@ public class StudentGroup implements StudentArrayOperation {
 		// Add your implementation here
 		for(int i=0;i<students.length;i++)
 		{
-			if((students[i].getId()==student.getId())&&(students[i].getFullName()==student.getFullName())&&(student[i].getBirthDate()==student.setBirthDate())&&(student[i].getAvgMark==student.getAvgMark()))
+			if((students[i].getId()==student.getId())&&(students[i].getFullName()==student.getFullName())&&(students[i].getBirthDate()==student.getBirthDate())&&(students[i].getAvgMark()==student.getAvgMark()))
 			{
-				if(i+1>=students.length||students[i+1]==NULL)
+				if(i+1>=students.length||students[i+1]==null)
 				{
-					throw new IllegalArgumentException;
+					throw new IllegalArgumentException();
 					
 				}
 				return students[i+1];
